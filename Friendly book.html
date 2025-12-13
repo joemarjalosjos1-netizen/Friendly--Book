@@ -1,0 +1,689 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <link rel="icon" href="favicon.ico" type="image/x-icon">
+  <title>Friendly Book — The Secret Genius</title>
+  <meta name="description" content="A simple, friendly website template for presenting a short book or story." />
+  <style>
+    :root{
+      --bg:#f7f7f9; --card:#ffffff; --muted:#6b7280; --accent:#2563eb; --radius:12px;
+    }
+    *{box-sizing:border-box}
+    body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,"Noto Sans",sans-serif;margin:0;background:var(--bg);color:#111}
+    header{background:linear-gradient(90deg, #fff 0%, #eef2ff 100%);padding:28px 20px;border-bottom:1px solid #e6e8ec}
+    .container{max-width:980px;margin:24px auto;padding:0 18px}
+    .brand{display:flex;gap:14px;align-items:center}
+    .logo{width:64px;height:64px;border-radius:10px;background:linear-gradient(135deg,var(--accent),#7c3aed);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:22px;box-shadow:0 6px 18px rgba(37,99,235,0.12)}
+    h1{margin:0;font-size:1.45rem}
+    p.lead{margin:6px 0 0;color:var(--muted)}
+
+    /* hero */
+    .hero{display:grid;grid-template-columns:220px 1fr;gap:20px;align-items:start;margin-top:22px}
+    .cover{background:linear-gradient(180deg,#fff,#f3f7ff);border-radius:14px;padding:18px;box-shadow:0 8px 30px rgba(2,6,23,0.06);border:1px solid #e7eefc}
+    .cover .title{font-weight:700;font-size:1.1rem;margin-bottom:6px}
+    .cover .author{font-size:0.95rem;color:var(--muted)}
+    .meta{margin-top:12px;font-size:0.9rem;color:var(--muted)}
+
+    /* book area */
+    nav.toc{margin-top:8px}
+    nav.toc ul{list-style:none;padding:0;margin:0;display:flex;gap:8px;flex-wrap:wrap}
+    nav.toc a{background:var(--card);padding:8px 12px;border-radius:999px;text-decoration:none;color:var(--accent);box-shadow:0 4px 14px rgba(37,99,235,0.06);font-weight:600}
+
+    main.reader{background:var(--card);margin-top:18px;padding:22px;border-radius:12px;box-shadow:0 8px 30px rgba(2,6,23,0.04)}
+    article.chapter{max-width:760px;margin:0 auto}
+    .chapter h2{margin-top:0}
+    .controls{display:flex;gap:8px;align-items:center;justify-content:flex-end;margin-bottom:12px}
+    button.btn{background:var(--accent);color:#fff;border:0;padding:8px 12px;border-radius:10px;cursor:pointer;font-weight:600}
+    button.btn.ghost{background:transparent;color:var(--accent);box-shadow:none;border:1px solid #e6ecff}
+    .muted{color:var(--muted);font-size:0.95rem}
+
+    /* small screens */
+    @media (max-width:700px){.hero{grid-template-columns:1fr;}.controls{justify-content:flex-start}}
+
+    /* reading theme */
+    .night{background:#0b1220;color:#d6e0ff}
+    .night main.reader{background:#071028;color:#dbeafe}
+
+    /* footer */
+    footer{margin:26px 0;padding:18px 0;text-align:center;color:var(--muted);font-size:0.95rem}
+
+    /* accessibility focus */
+    a:focus,button:focus{outline:3px solid rgba(37,99,235,0.18);outline-offset:3px}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <div class="brand">
+        <div class="logo">FB</div>
+        <div>
+          <h1>Friendly Book</h1>
+          <p class="lead">A lightweight, friendly website template for presenting a book or short story.</p>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="container">
+    <section class="hero">
+      <aside class="cover" aria-label="Book cover and info">
+        <div class="title">The Secret Genius</div>
+        <div class="author">By: Joemar Jalosjos</div>
+        <div class="meta">
+          <div>Genre: YA / Romance</div>
+          <div style="margin-top:8px" class="muted">Short intro: A story about two college freshmen who clash — then fall in love.</div>
+        </div>
+        <div style="margin-top:12px">
+          <button class="btn" id="startReading">Start Reading</button>
+          <button class="btn ghost" id="downloadTxt">Download .txt</button>
+        </div>
+      </aside>
+
+      <div>
+        <nav class="toc" aria-label="Table of contents">
+          <ul id="tocList">
+            <li><a href="#ch1">Chapter 1</a></li>
+            <li><a href="#ch2">Chapter 2</a></li>
+            <li><a href="#ch3">Chapter 3</a></li>
+            <li><a href="#ch4">Chapter 4</a></li>
+            <li><a href="#ch5">Chapter 5</a></li>
+            <li><a href="#ch6">Chapter 6</a></li>
+            <li><a href="#ch7">Chapter 7</a></li>
+            <li><a href="#ch8">Chapter 8</a></li>
+            <li><a href="#ch9">Chapter 9</a></li>
+            <li><a href="#ch10">Chapter 10</a></li>
+            <li><a href="#ch11">Chapter 11</a></li>
+            <li><a href="#ch12">Chapter 12</a></li>
+          </ul>
+        </nav>
+
+        <main class="reader" id="readerArea" tabindex="0">
+          <div class="controls">
+            <span class="muted">Display:</span>
+            <button class="btn ghost" id="toggleNight">Night</button>
+            <button class="btn ghost" id="increaseText">A+</button>
+            <button class="btn ghost" id="decreaseText">A-</button>
+          </div>
+
+          <article class="chapter" id="content">
+            <section id="ch1">
+              <h1 align="center"><font size="7">The Secret Genius</font></h1><br>
+              <h2>Kabanata 1 — Ang Freshman na Walang Pansin </h2>
+              <p>Unang araw ng college sa Saint Aurelia University, isa sa mga pinakasikat na private schools sa Cebu. Maaga pa lang, parang mall na ang campus, ay mga nagtitinda ng snacks sa gilid, may nagkukwentuhan tungkol sa profs na “terror daw,” at may mga nagpa-flex ng bagong uniforms at bagong phones.
+Pero sa lahat ng ingay na ’yon, may isang taong halos hindi napapansin.
+Si Skylar Reyes.
+Payat, medyo kulot ang hair, may hawak na notebook na malapit nang maghiwa-hiwalay. Naka-black hoodie kahit 32°C. Tahimik. Halos parang ghost na naglalakad sa hallway.
+Hindi siya invisible… pero feeling niya ganun.
+Ang Tropang Eksena
+“Uy, ayan na si hoodie boy!” sigaw ng isa sa mga basketball players.
+Sunod ang tawa.
+Kasama nila si Ralph Santiago – captain ng high school varsity noon, at malakas na candidate ngayon para makapasok sa college team. Matangkad, mestizo, malakas ang dating. Sikat. Laging confident.
+At laging mayabang pag si Skylar ang target.
+“Skylar! Bro, nice outfit,” sabi ni Ralph habang hawak ang bola. “Para kang pumunta sa sleepover, hindi school.”
+Tawanan ulit.
+Nakayuko lang si Skylar. Wala siyang balak makipagsagutan. Hindi dahil duwag siya—pero ayaw niya ng attention.
+“Just ignore them,” sabi niya sa sarili.
+Pero kahit anong ignore niya, hindi nawawala ang sakit.
+Hindi niya rin maintindihan kung bakit laging pinipili siyang asarin. Minsan, kahit wala siyang ginagawa, tinitira siya.
+Skylar = failure.
+ Skylar = weird.
+ Skylar = walang future.
+’Yan ang tingin ng karamihan.
+Pero mali sila.
+Malaking mali.
+Kasi kung alam lang nila ang totoo… si Skylar ay hindi lang basta matalino.
+ He’s a secret genius. The type na kayang mag-solve ng problems na pang-PhD level. The type na nagbasa ng college books since grade 6.
+Pero nobody knows.
+At ayaw niyang malaman nila.
+Ang Dalawang Crush na Mali ang Target
+Pagdating sa classroom, agad niyang nakita si Zia Villanueva, ang reason kung bakit hindi niya sine-cut ang first day. Cute, simple, may shoulder-length hair at glasses. Book lover. Hindi sosyal, pero sobrang bait.
+“Good morning, Mia,” bati ni Skylar na mahina pa sa bulong.
+Ngumiti si Mia. “Hi, Skylar. Ready ka na sa first college class natin?”
+Tumango siya.
+ Kahit hindi naman totoo.
+Pagpasok ni Ralph, parang automatic nag-ingay ang buong room.
+“Bro!!”
+ “Captain!!”
+ “Ralph, ikaw na talaga!”
+Ngumisi si Ralph, then biglang nag-ayos ng buhok. Kasi nakita niya ang crush niya si Alyssa Dizon, cheer dancer, maganda, confident. Yung tipong kahit hindi mo type, matutuwa ka pa rin pag ngumiti siya.
+“Hi Alyssa,” cool niyang sabi.
+Pero nakakagulat, dahil imbes na tumingin kay Ralph…
+Ngumiti si Alyssa kay Ria.
+At parang may sariling mundo silang dalawa.
+“Did you arrive early again?” tanong ni Alyssa kay Ria.
+“Yeah,” sagot ni Ria, sabay blush.
+Skylar: …wait.
+Ralph: …hoy?
+Pareho silang napatingin, parehong nagulat.
+Ria and Alyssa.
+ Crushes nilang dalawa.
+Pero sa isa’t isa… may spark.
+At hindi iyon imagination.
+Ang Class Orientation
+Pag-upo ng lahat, nag-start ang orientation. Pero imbes na makinig, mas busy si Skylar sa pag-iwas sa insecure feeling sa dibdib niya. Not because Ria likes someone else… pero dahil sa paraan ng tingin ni Ralph sa kanya minsan.
+Lalo na ngayon.
+Kanina, paghinto ng orientation, napansin niyang nakatingin si Ralph sa kanya. Hindi ’yung tingin ng bully–iba. Parang… curious. Parang may gustong malaman.
+Parang may alam.
+At doon nagsimulang kabahan si Skylar.
+The Suspicious Notebook
+Habang nagliligpit, napansin ni Skylar na nahulog ang isang black notebook mula sa bag ni Ralph. Kapansin-pansin dahil may malaking red sticker na nakasulat:
+CONFIDENTIAL — DO NOT OPEN
+Weird… bakit may ganito ang isang basketball player?
+ isip ni Skylar.
+Hindi niya pinulot. Hindi niya inabot. Pero bago pa man siya makalingon, tinapik siya ni Ralph.
+“Uy, nakita mo ’to?” tanong ni Ralph, sabay kuha ng notebook.
+Pero ’yung tingin niya…
+ Hindi pang-bully.
+ Hindi pang-asar.
+ Hindi pang-hype boy.
+Tingin na parang…
+ may na-aamoy siyang sekreto.
+Skylar felt a chill crawl down his spine.
+“Does he know?”
+Hindi puwedeng malaman ni Ralph.
+ Hindi puwedeng malaman ng kahit sino.
+His hidden identity must stay hidden.
+Pero habang lumalabas ng room si Ralph, bigla itong ngumiti sa kanya.
+Isang ngiti na hindi niya ma-explain.
+Isang ngiti na parang nagsasabing:
+“I’m watching you.”
+At doon nagsimula ang problema.
+At doon na rin nagsimula ang isang kwento na hindi nila inaasahang magbabago sa buhay nila.
+</p>
+            </section>
+
+            <section id="ch2">
+              <h2>Kabanata 2 — Kanino ka Lalapit?</h2>
+              <p>“Skylar! Ikaw na naman!” sigaw ni Ralph sa hallway, sabay tawa ng tropa niya. “Parang gusto mo lang palaging ma-stand out sa wrong reason.”
+“Hindi ko naman hinahanap ‘yang attention mo, Santiago,” sagot ni Skylar, pinipilit lang na calm. “Baka ikaw ang may problema.”
+Ngumisi si Ralph, sabay hawak ng bola. “Problem? Wala akong problema… maliban na lang sa utak mo. Bro, seryoso, iba ka. Nakakatawa.”
+Skylar (thought): Nakakainis siya. Parang lahat ng ginagawa ko, may mali sa kanya. Pero hindi niya alam ang totoo… hindi pa.
+Habang naglalakad sa hallway, nakita ni Skylar si Zia, abala sa pag-aayos ng mga libro sa kanyang locker.
+“Hi, Zia,” bati ni Skylar, medyo mahina, halos bulong lang.
+Ngumiti si Zia. “Hi, Skylar! Busy ka ba sa notes mo?”
+“Ah… oo, medyo,” sagot niya, pilit na hindi halata ang kaba. “Kaya medyo late na rin ako sa next class.”
+“Hmm, ganun ba…?” sabi ni Zia, medyo nagtaka pero nagpakita ng friendly smile. “Alam mo, baka puwede kitang tulungan minsan sa mga notes. Kung gusto mo.”
+Skylar (thought): Paano ko sasabihin sa kanya na hindi lang simple notes ang pinag-aaralan ko? Hindi pa. Hindi pa siya puwedeng malaman.
+“Ah… salamat, Zia. Maybe next time,” sagot niya, medyo nagkamot sa ulo, hindi alam kung bakit ang tibok ng puso niya biglang mabilis.
+
+Sa kabilang hallway, nakatingin si Ralph. Nakita niya ang interaction ng dalawa.
+Ralph (thought): Hmm… si Skylar… parang hindi lang basta nerd. Ang dali niyang makipag-usap kay Zia. Parang may ibang side siya.
+“Bro, bakit parang seryoso ka? Nasa school lang ‘to, hindi crime scene,” tanong ng tropa niya.
+Ngumiti si Ralph, hindi niya naalis ang tingin kay Skylar. “Wala… iniisip ko lang yung utak niya. Parang may tinatago.”
+
+Biglang bumangga si Skylar sa isang estudyante sa doorway.
+“Ah, sorry!” sabi niya, medyo nagulat.
+Ngumiti lang ang estudyante at nagpaalam. Pero si Ralph… nakatingin pa rin.
+Ralph (thought): Dapat ko talagang bantayan si Skylar. May something sa kanya… hindi pangkaraniwan.
+
+Pagpasok ng classroom, nakaupo na si Skylar sa likod, Zia sa tabi, Ralph sa harap.
+“Hoy, Skylar,” bulong ni Ralph habang nakatitig. “Sana huwag mong itago masyado ang talent mo. Makikita rin ng iba.”
+Skylar (thought): Ano ba siya? Gusto niyang malaman ang totoo ko na hindi ko pa puwedeng ipakita.
+Nag-start ang lecture, at sa loob ng klase, paulit-ulit ang tingin ni Ralph kay Skylar, parang may gustong i-solve.
+
+Pagkatapos ng unang subject, naglakad si Skylar palabas ng classroom, dala ang notebook. Nahulog ang lapis niya, at lumiko siya para pulutin. Biglang may humawak sa braso niya.
+“Skylar, wait,” sabi ni Ralph, medyo malapit. “Puwede ba tayong mag-usap sandali?”
+Skylar (thought): Oh no… bakit ngayon? Huwag… huwag, huwag…
+“Ah… okay,” sagot ni Skylar, dahan-dahang lumingon.
+“Alam mo… hindi ako bastos lang sa’yo para manakit ng feelings. Siguro… medyo curiosity lang,” sabi ni Ralph. “Alam mo, bro… may nakikita ako sa’yo. Something different.”
+Skylar (thought): May nakikita siya… pero hindi puwede niya malaman. Hindi puwede.
+“Different… paano?” tanong ni Skylar, pilit calm.
+“Parang… may secret ka,” sagot ni Ralph. “Something about you na… genius. Pero hindi lang basta genius. Something… wow.”
+Hindi makapaniwala si Skylar. Napatingin siya sa sahig. “Hindi… hindi mo puwedeng malaman. Wala.”
+Ngumiti si Ralph, parang nagbiro. “Wala… pero bro, mahilig ako sa mysteries. At alam mo… ikaw, bro, mukhang pinakamalaking mystery sa school na ito.”
+Skylar huminga ng malalim, pinipilit lang itago ang kaba at galit.
+
+Pagkatapos ng ilang minuto, tumalikod si Ralph at naglakad palayo. Habang papalayo siya, naisip ni Skylar:
+Skylar (thought): Hindi ito matatapos sa unang araw pa lang. Parang mas marami pang komplikasyon ang darating… at hindi ko pa alam kung paano ko haharapin si Ralph… o si Zia.
+</p>
+            </section>
+
+            <section id="ch3">
+              <h2>Kabanata 3 — Hindi Ka Normal… Alam Ko.</h2>
+              <p>Maaga pa lang, punuan na ang hallway. May nagtatakbuhan, may naghahabulan, may nagse-selfie. Si Skylar, tahimik lang na naglalakad, pilit iwas sa gulo. Mas gusto niyang walang pumapansin — lalo na ngayon na parang sumisikip ang dibdib niya kapag naiisip niyang na-perfect niya ang quiz kahapon.
+Skylar (thought):
+ Sana walang nakapansin masyado. Sana hindi nila bigyang halaga.
+Pero mali siya.
+Pagliko niya sa corridor, may humarang agad.
+“Broooo, ayan na si Perfect Score!” sigaw ng isang tropa ni Ralph.
+At nandun si Ralph mismo, nakasandal sa pader, bitbit ang bola niya. Nakangiti ng yung tipong… yung ngiting parang may naiisip na masama o nakakatuwa.
+“Skylar,” sabi ni Ralph, mababa ang boses. “Kausap tayo sandali.”
+Napahinto si Skylar.
+ “Ano na naman?”
+Lumapit si Ralph, dahan-dahan, parang may inaamoy na kakaibang hayop.
+“Noong quiz… ang bilis mo bro,” sabi ni Ralph, nakatitig mismo sa mata niya. “Parang hindi ka nag-iisip. Parang alam mo na agad yung sagot kahit hindi pa binibigay.”
+Umiling si Skylar.
+ “It’s nothing… lucky lang siguro.”
+Natawa si Ralph, malakas.
+ “LUCKY? Bro… 20/20? Lucky? Come on.”
+Umikot si Ralph sa paligid niya, parang predator na nag-i-inspect ng prey.
+Ralph (thought):
+ Hindi ako tanga. Hindi ito luck. Hindi ito coincidence.
+
+SA CLASSROOM
+Pumasok si Skylar, umupo sa likod. Kasunod niyang dumating si Zia, bitbit ang iced coffee.
+“Good morning, Skylar,” bati ni Zia, ngiti pa rin.
+ “Good morning,” sagot niya.
+Napatingin si Zia sa notebook niya.
+“Grabe ka ah… perfect score agad. Hindi ko akalain ang tahimik mo pero ang talino mo pala.”
+Nag-panic test si Skylar internally.
+Skylar (thought):
+ Please… please… wag ka na magtanong. I like you, but… wag sana lumalim to.
+“I just review… sometimes,” sagot niya, pilit maliit ang boses.
+Biglang may upong malakas sa harap nila.
+ Si Ralph.
+Tumalikod siya para tingnan si Skylar at Zia.
+“Morning, Zia,” sabi ni Ralph.
+“Good morning, Ralph,” ngumiti si Zia.
+Pero hindi nakatingin si Ralph kay Zia…
+ …nakatingin siya kay Skylar.
+“Perfect score ka ulit kaya today?” tanong ni Ralph, sarcastic.
+Nagkibit-balikat si Skylar.
+ “I don’t know.”
+Umiling si Ralph. “Liar.”
+
+AFTER CLASS — HALLWAY
+Naglalakad si Skylar palabas ng room, hawak ang notes niya. Mabilis siyang naglakad, baka maabutan na naman ng mga bully.
+Pero hindi bully ang umatake.
+ Mas nakakatakot.
+May humawak sa strap ng backpack niya — malakas pero hindi masakit.
+“Hoy,” sabi ni Ralph. “Dito ka muna.”
+Napalingon si Skylar.
+ “Ano ba?”
+Lumapit si Ralph, halos ilang pulgada lang ang pagitan ng mukha nila.
+“Skylar,” seryoso na ang tono. “Hindi ko alam kung ano yung tinatago mo. Pero nakikita ko.”
+Tense si Skylar.
+ Hindi alam kung lalayo o tatayo lang.
+“Ako? Wala akong tinatago—”
+“Meron,” putol ni Ralph.
+Tahimik ang buong hallway. Kahit ang mga dumadaan, sumisimpleng tingin sa dalawa.
+“Alam mo kung bakit?” tanong ni Ralph, bahagyang nakayuko.
+ Tuluyang tumutok ang mata niya kay Skylar.
+“Hindi ka normal.”
+Nanigas si Skylar.
+Skylar (thought):
+ Nakikita niya ba? Ramdam niya ba? Bakit siya ganito? Bakit parang mas kilala niya ako kaysa sa sarili ko?
+Pinilit niyang magsalita.
+ “Ralph… please. Stop. Hindi ko kailangan ‘to.”
+Pero ngumiti si Ralph — hindi masama, hindi rin mabait — kundi parang interesado.
+“Skylar, don’t get me wrong,” sabi niya softly. “Hindi kita inaaway lang. Curious ako. Hindi ko pa na-eencounter yung tulad mo.”
+Binitawan niya ang strap ng backpack ni Skylar.
+“Pero tandaan mo, bro…”
+ Tumingin siya diretso, halos may spark sa mata.
+“…hindi ako titigil hanggang malaman ko yung totoo sa’yo.”
+At tumalikod si Ralph, naglakad palayo na parang wala lang nangyari.
+Habang nakatayo si Skylar, nag-iisa.
+Skylar (thought):
+ Bakit parang mas lalo siyang lumalapit? Bakit hindi ko siya maitapon palayo? Bakit ako kinakabahan?
+At sa kabilang banda, nakatingin si Zia mula sa malayo — nagtataka, nakakunot ang noo.
+Zia (thought):
+ Bakit parang… iba ang tinginan nila?
+Skylar huminga nang malalim.
+ Hindi niya alam, pero ang araw na ito…
+ nagsisimula na ang mas malaking complication.</p>
+            </section>
+
+            <section id="ch4">
+              <h2>Kabanata 4 — Bakit Ka Tumitingin Nang Ganun?</h2>
+              <p>
+
+Skylar (thoughts):
+Ang aga pa pero ang bigat na agad ng pakiramdam ko. Habang naglalakad ako sa hallway, pakiramdam ko lahat ng mata nakatingin sa quiz result ko kahapon. Sana hindi na kumalat. Sana wala nang kumulit.
+
+Pero, of course… hindi ako ganun kaswerte.
+
+“Skylaaaar!”
+Rinig ko agad ang boses ni Ralph mula sa dulo ng hallway, yung tipong parang may nakita siyang bagong laruan.
+
+Umangat ang ulo ko, at ayun siya—nakatayo, naka-tukod ang braso sa locker, parang bida sa teen movie. Pero ang tingin niya… hindi nakakatawa.
+
+“Bro,” sabi ni Ralph habang papalapit. “Hindi pa nagsisimula ang klase pero ang isip mo parang nag-e-exam na. Relax.”
+
+Napairap si Skylar nang bahagya.
+“Hindi ko naman kailangan ng reminders mo.”
+
+Ngumisi si Ralph. “Hindi reminder ‘yun. Observation.”
+
+Skylar (thoughts):
+Observation? Ano siya, scientist?
+
+Pero bago pa ko makasagot, biglang lumapit si Zia, may hawak na dalawang notebooks.
+
+“Skylar! Good morning,” bati ni Zia, mas animated kaysa usual. “Na-review mo ba yung lesson today? Baka kailangan mo ulit ng help?”
+
+Napatingin si Ralph sa dalawa. Ngumuso.
+“Oo nga, Skylar. Kailangan mo ba ng help?”
+May halong tukso sa boses pero may kakaibang tono… parang gusto niyang malaman ang sagot.
+
+Umiling si Skylar. “Okay lang ako. Nakapag-review na.”
+
+Tumango si Zia, pero bago pa siya makaalis, nag-bow ang ulo niya nang konti.
+“By the way… congrats sa perfect score mo. Na-impress si prof.”
+
+At umalis siya, naglakad papunta sa kabilang corridor.
+
+Naiwan sina Ralph at Skylar.
+
+Tahimik muna.
+
+Tapos—
+“Perfect score ulit…” sabi ni Ralph, mababa. “Alam mo, bro, hindi ako naniniwala sa coincidence.”
+
+Tumaas ang balikat ni Skylar. “Then huwag.”
+
+Lumapit si Ralph, masyadong malapit. “Skylar… may pattern ka. Hindi ko pa gets, pero nararamdaman ko.”
+
+Skylar (thoughts):
+Nararamdaman niya? bakit parang aso? Ano ba ‘tong taong ‘to?
+
+“Bakit ba lagi mo akong pinapansin?” tanong ko finally. “Dami namang ibang tao rito.”
+
+Saglit na napatigil si Ralph.
+
+“Hindi ko alam,” sagot niya pagkatapos ng ilang segundo. “Pero everytime na nakikita kita… parang may puzzle sa harap ko. And you know me, bro. Hindi ako tumitigil sa puzzle.”
+
+Skylar (thoughts):
+Puzzle daw ako? Seriously? Hindi ako toy.
+
+Nagsimula nang dumami ang estudyanteng dumadaan. May nagbubulungan, may sumisimple ng tingin. Pero hindi umalis si Ralph.
+
+“Skylar,” sabi niya, mas mahinahon. “Promise… hindi ko ito ginagawa to bully you lang. Hindi ako ganun kababaw.”
+
+Napakunot ang noo ni Skylar.
+“Pero ginagawa mo naman.”
+
+Napakamot si Ralph sa batok, mukhang nahuli.
+
+“Okay… minsan. Pero ngayon hindi.”
+Tumingin siya diretso, seryoso. “I want to know you.”
+
+Nag-pause si Skylar.
+Nag-blink.
+Nag-process.
+
+Skylar (thoughts):
+WHAT? Ano daw?
+Knowing me? Bakit? Ano gusto niya malaman? Bakit parang— hindi. Hindi. Stop. Hindi pwede.
+
+Bago pa siya makagalaw, may kumalabit kay Skylar sa likod.
+
+“Ay, sorry!” sabi ni Alyssa, bitbit ang binder niya. “Naharangan ko pala kayo.”
+
+Ngumiti siya kay Skylar—hindi kay Ralph.
+
+“Skylar, ikaw yung top sa quiz, diba? Ang galing mo pala.”
+
+Natigilan si Skylar.
+Si Ralph… mas lalong natigilan.
+
+“Teka—what?” tanong ni Ralph, biglang defensive. “Alyssa, kilala mo si Skylar?”
+
+Ngumiti si Alyssa. “Oo. Nagkasabay kami sa lib nung isang araw. Tahimik siya pero mabait.”
+
+At naglakad na si Alyssa papunta kay Zia, kung saan sila mukhang may pag-uusapang malalim.
+
+Nang makaalis ang dalawa, bumalik ang tingin ni Ralph kay Skylar.
+
+Pero iba na.
+
+Hindi na yung bully-look.
+Hindi na yung teasing-look.
+Hindi na yung curious-look.
+
+Ito…
+parang realization.
+
+“Skylar…” sabi ni Ralph quietly. “Talagang… hindi ka normal.”
+
+Tinaasan ni Skylar ng kilay. “Compliment ba ‘yan o insult?”
+
+Ngumiti si Ralph, yung maloko pero may halong admiration na hindi niya aaminin.
+“Hindi ko pa alam. I’ll figure it out.”
+
+Tumalikod si Ralph.
+
+Pero bago siya lumayo, tumingin ulit.
+
+“Bro… hindi ako titigil.”
+
+At umalis.
+
+Naiwan si Skylar, tulala, hindi mapakali.
+
+Skylar (thoughts):
+Anong problema ng taong iyon? Bakit parang sinusundan ako ng universe para guluhin niya ako?
+
+Hindi niya alam…
+
+…pero ito na ang simula ng mas malalim na koneksyon na kahit siya, hindi mai-explain.</p>
+            </section>
+            <section id="ch5">
+              <h2>Kabanata 5 — Bakit Parang Kilala Mo Ako?</h2>
+              <p>Skylar (thoughts):
+Pakiramdam ko iba ang hangin today. Parang mas madaming matang nakatingin, kahit tahimik lang ako. Sana hindi nila napansin na ako yung naka-perfect score kahapon. Ayoko ng attention. Ayoko ng spotlight. Gusto ko lang maging normal—kahit hindi naman talaga ako normal.
+
+Nagbukas ako ng notebook para mag-pretend na busy, pero hindi nagwo-work. Paulit-ulit bumabalik sa isip ko yung sinabi ni Ralph:
+
+“Hindi ako titigil hanggang malaman ko yung totoo sa’yo.”
+
+Bago ko pa ma-process, may bumagsak na shadow sa desk ko. Mabigat. Familiar.
+At hindi ako nagkamali.
+
+Si Ralph na naman.
+
+Umupo siya bigla sa harap ko, walang hiya-hiya.
+“Morning, bro.”
+
+Napatingin ako sa kanya. “Bakit ka dito?”
+
+“Trip ko,” sagot niya, nakangiti pa. “Tsaka gusto ko marinig kung ano yung sasabihin mo kapag malapit ako.”
+
+Skylar (thoughts):
+Bakit ba siya ganito? Lalo siyang dumidikit. Lalo siyang nakakainis.
+
+“Ang dami mong tanong,” dagdag niya. “Pero ikaw, bro… mas marami kang hindi sinasabi.”
+
+Hindi ako sumagot. Wala naman siyang alam. Hindi niya puwedeng malaman.
+
+Pero biglang may lumapit.
+
+“Skylar! May quiz tayo mamaya, sabi ng prof!”
+Si Zia—hawak ang iced coffee, obvious na nagmamadali.
+
+Napatingin siya kay Ralph.
+“Ah… bakit magkatabi kayo?”
+
+Mabilis na sumagot si Ralph, as always.
+“Study buddy kami.”
+
+“Hindi,” sagot ko agad.
+
+Ngumisi si Ralph. “Relax, joke lang. Pero pwede naman, di ba?”
+
+Namula si Zia ng konti. “If you want, Skylar… pwede tayong mag-review mamaya sa library.”
+
+At bago ako makasagot, si Ralph uli ang sumabat.
+
+“Sumabay na siya sa’min,” sabi niya, confident. “Mas mabilis kasi ako magpaliwanag.”
+
+Tinaasan ko siya ng kilay. “Since when?”
+
+“Since now,” sagot niya, sabay kindat pa.
+
+Skylar (thoughts):
+Lord… bakit ako pinaglalaban ng dalawang tao na hindi ko man ginulo?
+
+Nakaupo kami ngayon sa library. Tahimik. Lamig. Amoy papel.
+Si Zia nagsusulat, full focus.
+Ako nagbabasa, kunwari nag-aaral.
+Si Ralph… hindi nagbabasa.
+
+Nakatingin lang sa’kin.
+As in, doon lang.
+
+“Ralph,” sabi ko finally, hindi na matiis. “Pwede bang magbasa ka?”
+
+“Binabasa ko naman,” sagot niya, kalmado.
+
+“Ano? Mukha ba akong libro?”
+
+“Depende,” sagot niya. “Minsan, parang encyclopedia ka.”
+
+Napairap ako.
+Pero hindi siya tumigil.
+
+“Skylar,” seryoso niyang sabi. “Kapag nagsusulat ka, hindi ka nag-iisip. Automatic. Ang bilis. Parang may pattern ka na sinusunod.”
+
+Pinagpatuloy niya:
+“Hindi ‘to yung ‘smart kid’ level. Iba ka.”
+
+Skylar (thoughts):
+Tumigil ka. Please. Tumigil ka na bago ka pa maging tama.
+
+“Hindi ko alam sinasabi mo,” sagot ko.
+
+Pero ngumiti si Ralph. Yung ngiti niya na parang: “Luh, obvious.”
+
+Pauwi na kami pagkatapos mag-aral. Si Zia nasa unahan, naglalakad nang mabilis dahil may kailangan pa siyang i-print.
+Ako at si Ralph, magkatabi. Tahimik.
+
+Napansin kong tinitingnan niya ang kamay ko.
+Parang may nihihimay.
+
+“Skylar,” sabi niya bigla, hindi tumitingin pero ramdam ko yung bigat ng boses niya. “Alam mo… hindi ako galit sa’yo. Hindi rin ako nang-aasar dahil trip ko lang.”
+
+Lumiko ako para tumingin.
+Hindi siya nagbibiro.
+Hindi siya mayabang.
+
+“Gusto ko lang malaman kung sino ka talaga,” dagdag niya.
+
+Napahinto ako.
+
+“Bakit?”
+
+Tumingin siya sa sapatos niya, saglit, bago bumalik ang mata niya sa akin.
+
+“Because…”
+Huminga siya nang dahan-dahan.
+“…parang kilala kita. Kahit hindi dapat.”
+
+Natigilan ako.
+
+Skylar (thoughts):
+…ano raw? Paano?
+Imposible. Hindi niya ako kilala. Hindi niya ako pwedeng kilala.
+Bakit parang mas tama pa siya kaysa sa dapat?
+
+Ngumiti siya, maliit pero sincere.
+
+“And that’s why… hindi ako titigil.”
+
+Naglakad siya pauna, sinusundan si Zia, parang wala lang nangyari.
+
+Ako?
+Naiwan akong nakatayo. Tulala. Parang binuksan niya isang pintuan na matagal ko nang nilock.
+
+Skylar (thoughts):
+Bakit parang… mas alam niya ako kaysa sa dapat?
+At bakit ako… natatakot
+pero hindi lang dahil sa secret ko…
+kundi dahil baka may connection kami na hindi ko alam?</p>
+
+              <section id="ch6">
+              <h2>Kabanata 2 — Kanino ka Lalapit?</h2>
+              <p></p>
+
+              <section id="ch7">
+              <h2>Kabanata 2 — Kanino ka Lalapit?</h2>
+              <p>
+
+                <section id="ch8">
+              <h2>Kabanata 2 — Kanino ka Lalapit?</h2>
+              <p>
+
+                <section id="ch9">
+              <h2>Kabanata 2 — Kanino ka Lalapit?</h2>
+              <p>
+
+                <section id="ch10">
+              <h2>Kabanata 2 — Kanino ka Lalapit?</h2>
+              <p>
+
+                <section id="ch11">
+              <h2>Kabanata 2 — Kanino ka Lalapit?</h2>
+              <p>
+
+                <section id="ch12">
+              <h2>Kabanata 2 — Kanino ka Lalapit?</h2>
+              <p>
+
+
+
+            <hr>
+            <p class="muted">You can edit the chapter text in the HTML. Want more chapters, character pages, or an author notes section? Ask and I'll add them.</p>
+          </article>
+        </main>
+      </div>
+    </section>
+
+    <footer>
+      <div class="muted">Made with ☕ and a little imagination — edit freely.</div>
+    </footer>
+  </div>
+
+  <script>
+    // small interactive helpers
+    const body = document.body;
+    const reader = document.getElementById('readerArea');
+    const startBtn = document.getElementById('startReading');
+    const toggleNight = document.getElementById('toggleNight');
+    const inc = document.getElementById('increaseText');
+    const dec = document.getElementById('decreaseText');
+    const downloadTxt = document.getElementById('downloadTxt');
+
+    startBtn.addEventListener('click', ()=>{
+      document.querySelector('#ch1').scrollIntoView({behavior:'smooth'});
+      reader.focus();
+    });
+
+    toggleNight.addEventListener('click', ()=>{
+      body.classList.toggle('night');
+      toggleNight.textContent = body.classList.contains('night') ? 'Day' : 'Night';
+    });
+
+    function changeFontSize(delta){
+      const art = document.querySelector('.chapter');
+      const style = window.getComputedStyle(art).fontSize;
+      const current = parseFloat(style);
+      art.style.fontSize = (current + delta) + 'px';
+    }
+    inc.addEventListener('click', ()=>changeFontSize(2));
+    dec.addEventListener('click', ()=>changeFontSize(-2));
+
+    // simple download of the chapters as plain text
+    downloadTxt.addEventListener('click', ()=>{
+      const sections = document.querySelectorAll('.chapter section');
+      let text = 'The Secret Genius\n\n';
+      sections.forEach(s=>{
+        const title = s.querySelector('h2')?.innerText || '';
+        const paras = Array.from(s.querySelectorAll('p')).map(p=>p.innerText).join('\n\n');
+        text += title + '\n\n' + paras + '\n\n---\n\n';
+      });
+      const blob = new Blob([text], {type:'text/plain'});
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a'); a.href = url; a.download = 'the-secret-genius.txt'; document.body.appendChild(a); a.click(); a.remove(); URL.revokeObjectURL(url);
+    });
+
+    // make TOC links smooth
+    document.querySelectorAll('nav.toc a').forEach(a=>{
+      a.addEventListener('click', e=>{e.preventDefault(); const id = a.getAttribute('href'); document.querySelector(id).scrollIntoView({behavior:'smooth'});});
+    });
+
+    // set sensible initial font-size for reading
+    document.querySelector('.chapter').style.fontSize = '18px';
+  </script>
+</body>
+</html>
